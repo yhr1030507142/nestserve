@@ -1,0 +1,54 @@
+import { Dependencies, Module } from '@nestjs/common'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
+import { MenusModule } from './modules/menus/menus.module'
+import { UsersModule } from './modules/users/users.module'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { DataSource } from 'typeorm'
+import { database } from 'config'
+import { CommonModule } from './modules/common/common.module'
+import { AuthModule } from './modules/auth/auth.module'
+import { DepstModule } from './modules/depts/depts.module'
+import { RolesModule } from './modules/roles/module'
+import { NoticesModule } from './modules/notices/module'
+import { SystenConfigsModule } from './modules/configs/module'
+import { LoginLogsModule } from './modules/loginLogs/module'
+import { GlobalModule } from './modules/global/global.module'
+import { ArticlesModule } from './modulesBusi/articles/module'
+import { ArticleCatalogsModule } from './modulesBusi/articleCatalogs/module'
+import { TrashModule } from './modulesBusi/trash/module'
+import { ScheduleModule } from '@nestjs/schedule'
+import { TasksModule } from './common/tasks/tasks.module'
+import { HttpModule } from './common/http/module'
+import { AiModule } from './modulesAi/ai/module'
+import { SystemLogModule } from './modules/systemLog/module'
+
+@Dependencies(DataSource)
+@Module({
+  imports: [
+    TypeOrmModule.forRootAsync({ useFactory: database }),
+    ScheduleModule.forRoot(),
+    TasksModule,
+    HttpModule,
+    MenusModule,
+    UsersModule,
+    CommonModule,
+    AuthModule,
+    DepstModule,
+    RolesModule,
+    NoticesModule,
+    SystenConfigsModule,
+    LoginLogsModule,
+    GlobalModule,
+    ArticlesModule,
+    ArticleCatalogsModule,
+    TrashModule,
+    AiModule,
+    SystemLogModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}
