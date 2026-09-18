@@ -176,7 +176,7 @@ export class BaseService<T, K> {
         roles: true,
       },
     })
-    if (user.name === config.adminKey) {
+    if (user.account === config.adminKey) {
       return '*'
     }
     user.dataPermissionType = user.roles?.sort(
@@ -206,7 +206,7 @@ export class BaseService<T, K> {
   }
 
   // 数据权限校验
-  async dataValidate(data: { id; [config.reqUserId] }): Promise<boolean> {
+  async dataValidate(data: { id; [key: string]: any }): Promise<boolean> {
     let row = data.id && (await this.getOne({ id: data.id }, false))
     let userIds = await this.getUserDataPermissionRelatedUserIds(data[config.reqUserId])
 

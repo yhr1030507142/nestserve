@@ -26,7 +26,12 @@ export class User extends BaseEntity {
   @DbUnique
   @IsNotEmpty()
   @MaxLength(30)
-  @BaseColumn()
+  @BaseColumn({ comment: '登录账号' })
+  account: string
+
+  @IsNotEmpty()
+  @MaxLength(30)
+  @BaseColumn({ comment: '名称' })
   name: string
 
   @BaseColumn({ comment: '昵称' })

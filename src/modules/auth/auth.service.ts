@@ -41,8 +41,8 @@ export class AuthService {
         throw new Error(validate)
       }
 
-      user = await this.usersService.getOne({ name: body.account })
-      if (user.name === config.adminKey) {
+      user = await this.usersService.getOne({ account: body.account })
+      if (user.account === config.adminKey) {
         user.permissions = ['*']
       } else {
         let menus = await this.RolesService.getUserMenus(user)
@@ -69,7 +69,7 @@ export class AuthService {
 
     const payload = {
       sub: user.id,
-      account: user.name,
+      account: user.account,
       address,
       loginTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
       ...result,

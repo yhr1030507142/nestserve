@@ -1,0 +1,11 @@
+const m = require('mysql2/promise')
+;(async () => {
+  const c = await m.createConnection({ host: 'localhost', user: 'root', password: '123456', database: 'nest_admin', port: 3306 })
+  const [cols] = await c.query("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='family_member' ORDER BY ORDINAL_POSITION")
+  console.log('family_member 表列:')
+  cols.forEach(c => console.log('  ' + c.COLUMN_NAME))
+  const [rows] = await c.query('SELECT * FROM family_member WHERE is_delete IS NULL')
+  console.log('\n所有成员:')
+  rows.forEach(r => console.log('  ' + JSON.stringify(r)))
+  await c.end()
+})().catch((e) => console.error(e.message))

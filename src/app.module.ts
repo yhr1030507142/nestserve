@@ -17,6 +17,7 @@ import { GlobalModule } from './modules/global/global.module'
 import { ArticlesModule } from './modulesBusi/articles/module'
 import { ArticleCatalogsModule } from './modulesBusi/articleCatalogs/module'
 import { TrashModule } from './modulesBusi/trash/module'
+import { FamilyModule } from './modulesBusi/family/module'
 import { ScheduleModule } from '@nestjs/schedule'
 import { TasksModule } from './common/tasks/tasks.module'
 import { HttpModule } from './common/http/module'
@@ -43,6 +44,7 @@ import { SystemLogModule } from './modules/systemLog/module'
     ArticlesModule,
     ArticleCatalogsModule,
     TrashModule,
+    FamilyModule,
     AiModule,
     SystemLogModule,
   ],
