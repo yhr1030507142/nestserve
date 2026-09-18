@@ -7,7 +7,7 @@ export const secret = {
 
   prod: {
     database: {
-      password: '',
+      password: '123456',
     },
   },
 }
